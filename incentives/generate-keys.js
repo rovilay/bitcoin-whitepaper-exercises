@@ -15,8 +15,13 @@ var options = {
 openpgp.generateKey(options).then(function onGenerated(key) {
 	try { fs.mkdirSync(KEYS_DIR); } catch (err) {}
 
+	console.log('KEEEYYY: ', key)
+
 	fs.writeFileSync(path.join(KEYS_DIR,"priv.pgp.key"),key.privateKeyArmored,"utf8");
 	fs.writeFileSync(path.join(KEYS_DIR,"pub.pgp.key"),key.publicKeyArmored,"utf8");
 
 	console.log("Keypair generated.");
+})
+.catch((error) => {
+	console.log('ERROR: ', error)
 });
